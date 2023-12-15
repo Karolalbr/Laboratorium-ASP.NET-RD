@@ -1,0 +1,10 @@
+﻿@model labaspnet.Models.Album
+
+<h2>Usuń album</h2>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <p>Czy jesteś pewny, że chcesz usunąć ten album: @Model.AlbumName?</p>
+    <button type="submit" class="btn btn-danger">Usuń</button>
+    <a asp-action="Index" class="btn btn-secondary">Anuluj</a>
+</form>

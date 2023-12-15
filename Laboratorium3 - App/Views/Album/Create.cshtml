@@ -1,0 +1,43 @@
+﻿@model labaspnet.Models.Album
+
+<h2>Dodaj Wykonawce</h2>
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="AlbumName">Nazwa Albumu</label>
+        <input asp-for="AlbumName" class="form-control" />
+        <span asp-validation-for="AlbumName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BandName">Nazwa Zespołu</label>
+        <input asp-for="BandName" class="form-control" />
+        <span asp-validation-for="BandName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SongList">Liczba Piosenek</label>
+        <input asp-for="SongList" class="form-control" />
+        <span asp-validation-for="SongList" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Rating">Notowanie</label>
+        <input asp-for="Rating" class="form-control" />
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DatePublished">Data wydania</label>
+        <input asp-for="DatePublished" class="form-control" />
+        <span asp-validation-for="DatePublished" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Duration">Czas Trwania Albumu</label>
+        <input asp-for="Duration" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+</form>

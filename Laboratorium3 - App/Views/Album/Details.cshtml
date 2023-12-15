@@ -1,0 +1,27 @@
+﻿@model labaspnet.Models.Album
+
+<h2>Szczegóły książki</h2>
+
+<dl class="row">
+    <dt class="col-sm-2">Nazwa Albumu</dt>
+    <dd class="col-sm-10">@Model.AlbumName</dd>
+
+    <dt class="col-sm-2">Nazwa Zespołu</dt>
+    <dd class="col-sm-10">@Model.BandName</dd>
+
+    <dt class="col-sm-2">Liczba Piosenek</dt>
+    <dd class="col-sm-10">@Model.SongList</dd>
+
+    <dt class="col-sm-2">Notowania</dt>
+    <dd class="col-sm-10">@Model.Rating</dd>
+
+    <dt class="col-sm-2">Data Publikacji</dt>
+    <dd class="col-sm-10">@Model.DatePublished</dd>
+    
+    <dt class="col-sm-2">Czas Trwania Albumu</dt>
+    <dd class="col-sm-10">@Model.Duration</dd>
+
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edytuj</a>
+<a asp-action="Index" class="btn btn-secondary">Powrót do listy książek</a>

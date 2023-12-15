@@ -1,0 +1,30 @@
+﻿@model Dictionary<int, labaspnet.Models.Album>
+
+<h2>Lista albumów</h2>
+<table class="table">
+    <tr>
+        <th>Nazwa Albumu</th>
+        <th>Nazwa Zespołu</th>
+        <th>Liczba Piosenek</th>
+        <th>Notowanie</th>
+        <th>Rok Wydania</th>
+        <th>Czas Trwania</th>
+        <th>Akcje</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Value.AlbumName</td>
+            <td>@item.Value.BandName</td>
+            <td>@item.Value.SongList</td>
+            <td>@item.Value.Rating</td>
+            <td>@item.Value.DatePublished</td>
+            <td>@item.Value.Duration</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Key" class="btn btn-primary">Edytuj</a>
+                <a asp-action="Details" asp-route-id="@item.Key" class="btn btn-secondary">Szczegóły</a>
+                <a asp-action="Delete" asp-route-id="@item.Key" class="btn btn-danger">Usuń</a>
+            </td>
+        </tr>
+    }
+</table>
