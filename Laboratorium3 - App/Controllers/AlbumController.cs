@@ -1,20 +1,22 @@
 ﻿using labaspnet.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace labaspnet.Controllers
 {
+    [Authorize]
     public class AlbumController : Controller
     {
         private static List<Album> _albums = new List<Album>();
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var albumsDictionary = _albums.ToDictionary(album => album.Id);
             return View(albumsDictionary);
         }
-
 
         [HttpGet]
         public IActionResult Create()
@@ -87,6 +89,7 @@ namespace labaspnet.Controllers
             return NotFound();
         }
 
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             var album = _albums.FirstOrDefault(a => a.Id == id);

@@ -2,9 +2,12 @@
 using Laboratorium3___App.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Laboratorium3___App.Controllers
 {
+    [Authorize]
     public class ContactController : Controller
     {
         private readonly IContactService _contactService;
@@ -32,41 +35,23 @@ namespace Laboratorium3___App.Controllers
             return View(new Contact() { OrganizationList = CreateSelectListItem() });
         }
 
-        [HttpGet]
-        public IActionResult CreateApi()
-        {
-            return View();
-        }
-        
-        [HttpPost]
-        public IActionResult CreateApi(Contact model)
-        {
-            if (ModelState.IsValid) // validation of "Contact model"
-            {
-                _contactService.Add(model);
-                return RedirectToAction("Index");
-            }
-
-            return View(model); // show form again - with errors
-        }
-
         [HttpPost]
         public IActionResult Create(Contact model)
         {
-            if (ModelState.IsValid) // validation of "Contact model"
+            if (ModelState.IsValid)
             {
                 _contactService.Add(model);
                 return RedirectToAction("Index");
             }
 
             model.OrganizationList = CreateSelectListItem();
-            return View(model); // show form again - with errors
+            return View(model);
         }
 
         [HttpGet]
         public IActionResult Update(int id)
         {
-            return View(_contactService.FindById(id));    
+            return View(_contactService.FindById(id));
         }
 
         [HttpPost]
@@ -78,7 +63,7 @@ namespace Laboratorium3___App.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View();
+            return View(model);
         }
 
         [HttpGet]
@@ -94,7 +79,7 @@ namespace Laboratorium3___App.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             var model = _contactService.FindById(id);
@@ -105,12 +90,12 @@ namespace Laboratorium3___App.Controllers
         private List<SelectListItem> CreateSelectListItem()
         {
             var items = _contactService.FindAllOrganizations()
-                          .Select(e => new SelectListItem()
-                          {
-                              Text = e.Name,
-                              Value = e.Id.ToString()
-                          }).ToList();
-            items.Add(new SelectListItem() { Text = "Unknown", Value = "" });
+                .Select(e => new SelectListItem()
+                {
+                    Text = e.Name,
+                    Value = e.Id.ToString()
+                }).ToList();
+            items.Insert(0, new SelectListItem() { Text = "Unknown", Value = "" });
             return items;
         }
     }
